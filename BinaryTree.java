@@ -19,6 +19,8 @@ public class BinaryTree {
 		tree.preOrderTraverseTree(tree.root);
 		System.out.println();
 		tree.postOrderTraverseTree(tree.root);
+		System.out.println();
+		System.out.println(tree.findNode(30).name);
 	}
 	
 	public void inOrderTraverseTree(Node focusNode) {
@@ -35,6 +37,19 @@ public class BinaryTree {
 			preOrderTraverseTree(focusNode.leftChild);
 			preOrderTraverseTree (focusNode.rightChild);
 		}
+	}
+	
+	public Node findNode (int key) {
+		Node focusNode=root;
+		while (focusNode.key!=key) {
+			if (key<focusNode.key) {
+				focusNode=focusNode.leftChild;
+			} else {
+				focusNode=focusNode.rightChild;
+			}
+			if (focusNode==null) return null;
+		}
+		return focusNode;
 	}
 	
 	public void postOrderTraverseTree (Node focusNode) {
