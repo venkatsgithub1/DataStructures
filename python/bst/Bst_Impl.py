@@ -35,8 +35,10 @@ class BinarySearchTree:
             print("value already in tree!")
 
     def print_tree(self):
+        print("-----Tree starts-----")
         if self.root is not None:
             self._print_tree(self.root)
+        print("-----Tree ends-----")
 
     def _print_tree(self, current_node):
         if current_node is not None:
