@@ -177,10 +177,13 @@ class BinarySearchTree:
 
         # CASE 1: if child count  = 0
         if node_children == 0:
-            if node_parent.left_child == node:
-                node_parent.left_child = None
-            if node_parent.right_child == node:
-                node_parent.right_child = None
+            if node_parent!=None:
+                if node_parent.left_child == node:
+                    node_parent.left_child = None
+                if node_parent.right_child == node:
+                    node_parent.right_child = None
+            else:
+                self.root = None
 
         # CASE 2: if child count = 1
         if node_children == 1:
@@ -189,11 +192,14 @@ class BinarySearchTree:
             else:
                 child = node.right_child
 
+            if node_parent!=None:
             # replace node to be deleted with child node.
-            if node_parent.left_child == node:
-                node_parent.left_child = child
-            if node_parent.right_child == node:
-                node_parent.right_child = child
+                if node_parent.left_child == node:
+                    node_parent.left_child = child
+                else:
+                    node_parent.right_child = child
+            else:
+                self.root = child
 
             child.parent = node_parent
 
@@ -232,8 +238,8 @@ class BinarySearchTree:
         if current_node is None:
             return
         
-        left_height = self.get_height(current_node.parent.left_child)
-        right_height = self.get_height(current_node.parent.right_child)
+        left_height = self.get_height(current_node.left_child)
+        right_height = self.get_height(current_node.right_child)
 
         if abs(left_height-right_height) > 1:
             y = self.taller_child(current_node)
@@ -306,4 +312,14 @@ class BinarySearchTree:
     def taller_child(self,current_node):
         left = self.get_height(current_node.left_child)
         right = self.get_height(current_node.right_child)
-        return current_node.left_child if left >=right else current_node.left_child
+        return current_node.left_child if left >=right else current_node.right_child
+
+a = BinarySearchTree()
+for i in range(10):
+    print("Inserting {}".format(str(i)))
+    a.insert(i)
+    print(a)
+for i in range(10):
+    print("Deleting {}".format(str(i)))
+    a.delete_value(i)
+    print(a)
