@@ -81,3 +81,10 @@ if __name__ == "__main__":
     min_heap.delete_minimum()
 
     print(min_heap)
+    
+"""
+Output:
+[0, 10, 20, 40, 60, 30, 50]
+10
+[0, 20, 30, 40, 60, 50]
+"""
