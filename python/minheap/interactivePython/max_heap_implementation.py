@@ -40,20 +40,22 @@ class Max_Heap():
         return node * 2 + 1
 
     def perc_down(self, current):
-        node = current * 2
-        while node <= self.size():
+        while current * 2 <= self.size():
             # get max_child
-            max_child = self.max_child(node)
-            if self.heap_list[node] < self.heap_list[max_child]:
-                self.heap_list[node], self.heap_list[max_child]
-            node = max_child
+            max_child = self.max_child(current)
+            if self.heap_list[current] < self.heap_list[max_child]:
+                self.heap_list[current], self.heap_list[max_child] = self.heap_list[max_child], self.heap_list[current]
+            current = max_child
 
     def delete_maximum(self):
         if self.size() == 0:
             raise MaxHeapError("Heap is empty")
-        self.heap_list[0] = self.heap_list[self.size()]
-        self.perc_down(1)
+        self.heap_list[1] = self.heap_list[self.size()]
+        data = self.heap_list[1]
+        self.heap_list.pop()
         self.current_size -= 1
+        self.perc_down(1)
+        return data
 
 
 if __name__ == "__main__":
@@ -70,14 +72,16 @@ if __name__ == "__main__":
     print(heap)
     heap.insert(15)
     print(heap)
-
+    heap.delete_maximum()
+    print(heap)
 
 """
-output:
+Output:
 [0, 10]
 [0, 20, 10]
 [0, 30, 10, 20]
 [0, 50, 30, 20, 10]
 [0, 50, 40, 20, 10, 30]
 [0, 50, 40, 20, 10, 30, 15]
+[0, 40, 30, 20, 10, 15]
 """
