@@ -17,23 +17,20 @@ class BinHeap:
         return str(self.heap_list)
 
     def perc_up(self, i):
-        parent_index = i // 2
-        while parent_index > 0:
-            if self.heap_list[i] < self.heap_list[parent_index]:
-                self.heap_list[i], self.heap_list[parent_index] = self.heap_list[parent_index], self.heap_list[i]
-            parent_index //= 2
+        while i // 2 > 0:
+            if self.heap_list[i] < self.heap_list[i // 2]:
+                self.heap_list[i], self.heap_list[i //
+                                                  2] = self.heap_list[i // 2], self.heap_list[i]
+            i //= 2
 
     def insert(self, data):
-        if(self.current_size == len(self.heap_list)):
-            raise BinHeapError("Heap is full")
         self.heap_list.append(data)
         self.current_size += 1
         self.perc_up(self.current_size)
 
     def perc_down(self, i):
-        parent_index = i * 2
         # loop till i * 2 is less than size
-        while parent_index <= self.current_size:
+        while i * 2 <= self.current_size:
             # get min child
             min_child = self.min_child(i)
             # if element at i is greater than at min child
@@ -41,7 +38,7 @@ class BinHeap:
                 # swap i and min child
                 self.heap_list[i], self.heap_list[min_child] = self.heap_list[min_child], self.heap_list[i]
             # go to next child to percolate down
-            parent_index = min_child
+            i = min_child
 
     def del_minimum(self):
         if self.is_empty():
@@ -49,6 +46,7 @@ class BinHeap:
         return_val = self.heap_list[0]
         # place last to first
         self.heap_list[1] = self.heap_list[self.current_size]
+        self.heap_list.pop()
         # decrement heap size
         self.current_size -= 1
         # percolate down
@@ -74,3 +72,11 @@ if __name__ == "__main__":
     heap.insert(40)
     heap.insert(15)
     print(heap)
+    heap.del_minimum()
+    print(heap)
+
+"""
+Output:
+[0, 10, 20, 15, 50, 40, 30]
+[0, 15, 20, 30, 50, 40]
+"""
