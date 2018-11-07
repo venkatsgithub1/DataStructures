@@ -17,21 +17,21 @@ public class GraphBreadthFirstSearch {
 		// 2
 		graph.addEdge(1, 2);
 		// 0__1
-		// | |
+		// |  |
 		// 2__|
 		graph.addEdge(2, 0);
 		// 0___1
-		// || |
+		// ||  |
 		// 2___|
 		graph.addEdge(2, 3);
 		// 0___1
-		// || |
+		// ||  |
 		// 2___|
 		// |
 		// 3
 		graph.addEdge(3, 3);
 		// 0___1
-		// || |
+		// ||  |
 		// 2___|
 		// |
 		// 3__
